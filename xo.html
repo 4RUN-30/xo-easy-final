@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    let one = false;
+    let two = false;
+    let three = false;
+    let four = false;
+    let five = false;
+    let six = false;
+    let seven = false;
+    let eight = false;
+    let nine = false;
+
+    let c = 0;
+    let x = [];
+    let o = [];
+    let gameOver = false;
+
+    function count1() {
+      if (!gameOver) {
+        c++;
+        if (!one) {
+          document.getElementById("img1x").style = "visibility:visible;";
+          x.push(1);
+          one = true;
+          check();
+          oPlay();
+        }
+      }
+
+    }
+    function oPlay() {
+      if (!gameOver) {
+        let rem = getRemainingElements();
+        let index = Math.floor(Math.random() * rem.length);
+        let value = rem[index];
+        let res = constructString(value);
+        document.getElementById(res).style = "visibility:visible";
+        check();
+      }
+    }
+
+    function constructString(value) {
+      switch (value) {
+        case 1:
+          one = true;
+          break;
+        case 2:
+          two = true;
+          break;
+        case 3:
+          three = true;
+          break;
+        case 4:
+          four = true;
+          break;
+        case 5:
+          five = true;
+          break;
+        case 6:
+          six = true;
+          break;
+        case 7:
+          seven = true;
+          break;
+        case 8:
+          eight = true;
+          break;
+        case 9:
+          nine = true;
+          break;
+      }
+      o.push(value);
+      return "img" + value + "o";
+    }
+
+    function getRemainingElements() {
+      let res = [];
+      let all = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (let i = 0; i < all.length; i++) {
+        let inside = false;
+        for (let j = 0; j < x.length; j++) {
+          if (all[i] == x[j]) {
+            inside = true;
+            break;
+          }
+        }
+        if (!inside) {
+          res.push(all[i]);
+        }
+      }
+      let finalres = [];
+      for (let i = 0; i < res.length; i++) {
+        let inside = false;
+        for (let j = 0; j < o.length; j++) {
+          if (res[i] == o[j]) {
+            inside = true;
+          }
+        }
+        if (!inside) {
+          finalres.push(res[i]);
+        }
+      }
+      console.log("O : " + o);
+      console.log("X : " + x);
+      console.log("Final : " + finalres);
+      return finalres;
+    }
+    function count2() {
+      if (!gameOver) {
+        c++;
+        if (!two) {
+          document.getElementById("img2x").style = "visibility:visible;";
+          x.push(2);
+          two = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count3() {
+      if (!gameOver) {
+        c++;
+        if (!three) {
+          document.getElementById("img3x").style = "visibility:visible;";
+          x.push(3);
+          three = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count4() {
+      if (!gameOver) {
+        c++;
+        if (!four) {
+          document.getElementById("img4x").style = "visibility:visible;";
+          x.push(4);
+          four = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count5() {
+      if (!gameOver) {
+        c++;
+        if (!five) {
+          document.getElementById("img5x").style = "visibility:visible;";
+          x.push(5);
+          five = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count6() {
+      if (!gameOver) {
+        c++;
+        if (!six) {
+          document.getElementById("img6x").style = "visibility:visible;";
+          x.push(6);
+          six = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count7() {
+      if (!gameOver) {
+        c++;
+        if (!seven) {
+          document.getElementById("img7x").style = "visibility:visible;";
+          x.push(7);
+          seven = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count8() {
+      if (!gameOver) {
+        c++;
+        if (!eight) {
+          document.getElementById("img8x").style = "visibility:visible;";
+          x.push(8);
+          eight = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function count9() {
+      if (!gameOver) {
+        c++;
+        if (!nine) {
+          document.getElementById("img9x").style = "visibility:visible;";
+          x.push(9);
+          nine = true;
+          check();
+          oPlay();
+        }
+      }
+    }
+    function check() {
+      let win = [
+        [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]
+      ]
+      for (let i = 0; i < win.length; i++) {
+        let countx = 0;
+        let counto = 0;
+        let flag = false;
+        for (let j = 0; j < win[i].length; j++) {
+          if (x.includes(win[i][j])) countx++;
+          if (o.includes(win[i][j])) counto++;
+          if (countx == 3) {
+            document.getElementById("res").innerHTML = "You Win";
+            gameOver = true;
+          }
+          if (counto == 3) {
+            document.getElementById("res").innerHTML = "You Lose";
+            gameOver = true;
+          }
+        }
+      }
+    }
+    function easy() {
+      document.getElementById("bigg").style = "visibility:visible;"
+    }
+
+    function setDefault() {
+      gameOver = false;
+      x = [];
+      o = [];
+      one = false;
+      two = false;
+      three = false;
+      four = false;
+      five = false;
+      six = false;
+      seven = false;
+      eight = false;
+      nine = false;
+      for(let i=1;i<=9;i++){
+        document.getElementById("img"+i+"x").style = "visibility:hidden;"; 
+        document.getElementById("img"+i+"o").style = "visibility:hidden;"; 
+      }
+      document.getElementById("res").innerHTML = "";
+    }
+  </script>
+  <style>
+    p {
+      display: block;
+    }
+
+    .whole {
+      display: grid;
+      background-color: rgb(255, 255, 255);
+      grid-template-rows: 100px 100px 100px;
+      width: 300px;
+    }
+
+    div[id^="box"] {
+      border-top: 1px solid rgb(14, 183, 50);
+      border-right: 1px solid rgb(14, 183, 50);
+      height: 100px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 100px 100px 100px;
+    }
+
+    #box1,
+    #box4,
+    #box7 {
+      border-left: 1px solid rgb(14, 183, 50);
+    }
+
+    #box7,
+    #box8,
+    #box9 {
+      border-bottom: 1px solid rgb(14, 183, 50);
+    }
+
+    span {
+      visibility: hidden;
+    }
+
+    div[id^="box"] {
+      position: relative;
+    }
+
+    .big {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      visibility: hidden;
+    }
+
+    body {
+      text-align: center;
+    }
+
+    * {
+      background-color: rgb(43, 42, 42);
+      color: rgb(14, 183, 50);
+      font-family: roboto;
+      ;
+    }
+
+    span {
+      font-size: 80px;
+      position: absolute;
+      left: 0px;
+      margin-left: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: 2px solid rgb(14, 183, 50);
+      border-radius: 3px;
+      transition: color 0.5s, background-color 0.5s;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      color: rgb(43, 42, 42);
+      background-color: rgb(14, 183, 50);
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Tic Tac Toe</h1>
+  <button onclick="easy()">Easy</button>
+  <button onclick="medium()">Medium</button>
+  <div id="bigg" class="big">
+    <div class="whole">
+      <div class="row">
+        <div onclick="count1()" id="box1">
+          <span id="img1x">X</span>
+          <span id="img1o">O</span>
+        </div>
+        <div onclick="count2()" id="box2">
+          <span id="img2x">X</span>
+          <span id="img2o">O</span>
+        </div>
+        <div onclick="count3()" id="box3">
+          <span id="img3x">X</span>
+          <span id="img3o">O</span>
+        </div>
+      </div>
+      <div class="row">
+        <div onclick="count4()" id="box4">
+          <span id="img4x">X</span>
+          <span id="img4o">O</span>
+        </div>
+        <div onclick="count5()" id="box5">
+          <span id="img5x">X</span>
+          <span id="img5o">O</span>
+        </div>
+        <div onclick="count6()" id="box6">
+          <span id="img6x">X</span>
+          <span id="img6o">O</span>
+        </div>
+      </div>
+      <div class="row">
+        <div onclick="count7()" id="box7">
+          <span id="img7x">X</span>
+          <span id="img7o">O</span>
+        </div>
+        <div onclick="count8()" id="box8">
+          <span id="img8x">X</span>
+          <span id="img8o">O</span>
+        </div>
+        <div onclick="count9()" id="box9">
+          <span id="img9x">X</span>
+          <span id="img9o">O</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p id="res"></p>
+  <button onclick="setDefault()">Play Again</button>
+</body>
+
+</html>
